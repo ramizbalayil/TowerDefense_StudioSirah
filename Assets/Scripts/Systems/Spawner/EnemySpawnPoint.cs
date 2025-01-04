@@ -8,15 +8,15 @@ namespace towerdefence.systems.spawner
 {
     public class EnemySpawnPoint : BaseBehaviour
     {
-        [SerializeField] private Transform mDestination;
-        [SerializeField] private int mMaxEnemies;
-        [SerializeField] private float mSpawnInterval;
+        [SerializeField] private Transform _Destination;
+        [SerializeField] private int _MaxEnemies;
+        [SerializeField] private float _SpawnInterval;
 
         [InjectService] private EventHandlerService mEventHandlerService;
 
         protected void Start()
         {
-            mEventHandlerService.TriggerEvent(new EnemySpawnerPointRegisterEvent(this, mDestination.position, mMaxEnemies, mSpawnInterval));
+            mEventHandlerService.TriggerEvent(new EnemySpawnerPointRegisterEvent(this, _Destination.position, _MaxEnemies, _SpawnInterval));
         }
 
         public void Hide()

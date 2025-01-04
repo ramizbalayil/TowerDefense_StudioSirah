@@ -12,6 +12,7 @@ namespace towerdefence.services
             // Initialize services here
             await ServiceRegistry.Bind<EventHandlerService>(new EventHandlerService());
             await ServiceRegistry.Bind<SceneManagementService>(new SceneManagementService());
+            await ServiceRegistry.Bind<ScoreKeeperService>(new ScoreKeeperService());
 
             IsInitialized = true;
         }

@@ -7,7 +7,7 @@ namespace frameworks.utils
 {
     public class Bootstrap : MonoBehaviour
     {
-        [SerializeField] private int bootSceneIndex = 1;
+        [SerializeField] private int _BootSceneIndex = 1;
 
         private void Start()
         {
@@ -20,7 +20,7 @@ namespace frameworks.utils
 
             yield return new WaitUntil(() => ServiceBinder.IsInitialized);
 
-            ServiceRegistry.Get<SceneManagementService>().LoadSceneAsync(bootSceneIndex);
+            ServiceRegistry.Get<SceneManagementService>().LoadSceneAsync(_BootSceneIndex);
         }
     }
 }

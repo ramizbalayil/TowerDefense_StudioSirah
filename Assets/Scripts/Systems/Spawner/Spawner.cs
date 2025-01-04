@@ -9,11 +9,10 @@ namespace towerdefence.systems.spawner
     public class Spawner<T> : BaseBehaviour where T : MonoBehaviour
     {
         [Header("Spawner Config")]
-        [SerializeField] public GameObject SpawnPrefab;
+        [SerializeField] private GameObject _SpawnPrefab;
 
-        [SerializeField] private bool collectionCheckForPool = false;
-        [SerializeField] private int defaultPoolSize = 3;
-        [SerializeField] private int maxPoolSize = 5;
+        [SerializeField] private int _DefaultPoolSize = 3;
+        [SerializeField] private int _MaxPoolSize = 5;
 
         [InjectService] protected EventHandlerService mEventHandlerService;
 
@@ -23,7 +22,7 @@ namespace towerdefence.systems.spawner
         {
             base.Awake();
             spawnPool = new ObjectPool<T>(InitializeUnits, GetUnit, ReleaseUnit,
-                DestroyUnit, collectionCheckForPool, defaultPoolSize, maxPoolSize);
+                DestroyUnit, false, _DefaultPoolSize, _MaxPoolSize);
         }
 
         protected T SpawnUnit(Vector3 pos)
@@ -35,7 +34,7 @@ namespace towerdefence.systems.spawner
 
         private T InitializeUnits()
         {
-            GameObject go = Instantiate(SpawnPrefab, transform);
+            GameObject go = Instantiate(_SpawnPrefab, transform);
             return go.GetComponent<T>();
         }
         private void DestroyUnit(T go)
