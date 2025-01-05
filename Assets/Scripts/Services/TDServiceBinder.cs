@@ -13,7 +13,8 @@ namespace towerdefence.services
             await ServiceRegistry.Bind<EventHandlerService>(new EventHandlerService());
             await ServiceRegistry.Bind<SceneManagementService>(new SceneManagementService());
             await ServiceRegistry.Bind<ScoreKeeperService>(new ScoreKeeperService());
-
+            await ServiceRegistry.Bind<LevelLoaderService>(new LevelLoaderService());
+            
             IsInitialized = true;
         }
     }

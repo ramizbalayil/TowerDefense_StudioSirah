@@ -1,3 +1,4 @@
+using frameworks.configs;
 using frameworks.services;
 using frameworks.services.scenemanagement;
 using System.Collections;
@@ -19,6 +20,8 @@ namespace frameworks.utils
             yield return null;
 
             yield return new WaitUntil(() => ServiceBinder.IsInitialized);
+            yield return new WaitUntil(() => ConfigBinder.IsInitialized);
+
 
             ServiceRegistry.Get<SceneManagementService>().LoadSceneAsync(_BootSceneIndex);
         }

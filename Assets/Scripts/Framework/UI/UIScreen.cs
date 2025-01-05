@@ -18,11 +18,13 @@ namespace frameworks.ui
         public void Show()
         {
             mCanvasGroup.alpha = 1f;
+            mCanvasGroup.blocksRaycasts = true;
         }
 
         public void Hide()
         {
             mCanvasGroup.alpha = 0f;
+            mCanvasGroup.blocksRaycasts = false;
         }
     }
 }
