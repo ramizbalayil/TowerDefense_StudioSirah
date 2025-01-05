@@ -657,6 +657,7 @@ GameObject:
   - component: {fileID: 667390607}
   - component: {fileID: 667390609}
   - component: {fileID: 667390608}
+  - component: {fileID: 667390610}
   m_Layer: 0
   m_Name: ----Spawner----
   m_TagString: Untagged
@@ -708,6 +709,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _SpawnPrefab: {fileID: 2720625518530114225, guid: dd2014a826563be44b27195f3d590689,
+    type: 3}
+  _DefaultPoolSize: 3
+  _MaxPoolSize: 5
+--- !u!114 &667390610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667390606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20132a793b7a4c1408a4041b84856af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SpawnPrefab: {fileID: 7727298748136499493, guid: d7edf9be3e8533e4e9e7372845a561b3,
     type: 3}
   _DefaultPoolSize: 3
   _MaxPoolSize: 5
@@ -1517,11 +1534,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2946927498594365672, guid: faf45522dfb9a97428fde687ea326aed,
         type: 3}
-      propertyPath: _MaxEnemies
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2946927498594365672, guid: faf45522dfb9a97428fde687ea326aed,
-        type: 3}
       propertyPath: mMaxEnemies
       value: 2
       objectReference: {fileID: 0}
@@ -1535,11 +1547,6 @@ PrefabInstance:
       propertyPath: mDestination
       value: 
       objectReference: {fileID: 4873202646184503079}
-    - target: {fileID: 2946927498594365672, guid: faf45522dfb9a97428fde687ea326aed,
-        type: 3}
-      propertyPath: _SpawnInterval
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2946927498594365672, guid: faf45522dfb9a97428fde687ea326aed,
         type: 3}
       propertyPath: mSpawnInterval

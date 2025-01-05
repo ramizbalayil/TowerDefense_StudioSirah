@@ -10,13 +10,14 @@ namespace towerdefence.events
         public Vector3 EnemyDestination;
         public int MaxEnemies;
         public float SpawnInterval;
-
-        public EnemySpawnerPointRegisterEvent(EnemySpawnPoint enemySpawnPoint, Vector3 enemyDestination, int maxEnemies, float spawnInterval)
+        public float EnemySpeed;
+        public EnemySpawnerPointRegisterEvent(EnemySpawnPoint enemySpawnPoint, Vector3 enemyDestination, int maxEnemies, float spawnInterval, float enemySpeed)
         {
             EnemySpawnPoint = enemySpawnPoint;
             EnemyDestination = enemyDestination;
             MaxEnemies = maxEnemies;
             SpawnInterval = spawnInterval;
+            EnemySpeed = enemySpeed;
         }
     }
 }

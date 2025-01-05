@@ -11,12 +11,13 @@ namespace towerdefence.systems.spawner
         [SerializeField] private Transform _Destination;
         [SerializeField] private int _MaxEnemies;
         [SerializeField] private float _SpawnInterval;
+        [SerializeField] private float _EnemySpeed;
 
         [InjectService] private EventHandlerService mEventHandlerService;
 
         protected void Start()
         {
-            mEventHandlerService.TriggerEvent(new EnemySpawnerPointRegisterEvent(this, _Destination.position, _MaxEnemies, _SpawnInterval));
+            mEventHandlerService.TriggerEvent(new EnemySpawnerPointRegisterEvent(this, _Destination.position, _MaxEnemies, _SpawnInterval, _EnemySpeed));
         }
 
         public void Hide()
