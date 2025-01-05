@@ -73,6 +73,7 @@ namespace towerdefence.characters.enemy
             if (other.TryGetComponent(out ProjectileBehaviour projectile))
             {
                 DoDamage(projectile.GetDamage());
+                projectile.HandleProjectileHit();
             }
         }
         #endregion

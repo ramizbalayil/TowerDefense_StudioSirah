@@ -7,6 +7,8 @@ namespace towerdefence.services
     public class LevelLoaderService : BaseService
     {
         private LevelInfo mCachedLevelInfo;
+        private int mCachedLevelNumber = 0;
+
         private LevelInfo[] mLevelInfos = null;
         private LevelInfo[] pLevelInfos
         {
@@ -28,13 +30,22 @@ namespace towerdefence.services
         public void LoadLevelInfo(int level)
         {
             mCachedLevelInfo = pLevelInfos[level - 1];
+            mCachedLevelNumber = level;
         }
 
-        public LevelInfo UnloadLevelInfo()
+        public LevelInfo GetLevelInfo()
         {
-            LevelInfo info = mCachedLevelInfo;
-            mCachedLevelInfo = null;
-            return info;
+            return mCachedLevelInfo;
+        }
+
+        public void UnlockNextLevel()
+        {
+            if (mCachedLevelNumber < pLevelInfos.Length)
+            {
+                LevelInfo info = pLevelInfos[mCachedLevelNumber];
+                info.Locked = false;
+                pLevelInfos[mCachedLevelNumber] = info;
+            }
         }
     }
 }

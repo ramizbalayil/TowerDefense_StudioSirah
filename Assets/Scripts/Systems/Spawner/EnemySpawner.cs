@@ -14,14 +14,14 @@ namespace towerdefence.systems.spawner
         {
             base.Awake();
             mEventHandlerService.AddListener<EnemySpawnerPointRegisterEvent>(OnEnemySpawnerPointRegister);
-            mEventHandlerService.AddListener<EnemyReachedDestinationEvent>(OnReleaseEnemyEvent);
+            mEventHandlerService.AddListener<EnemyReachedDestinationEvent>(OnEnemyReachedDestinationEvent);
             mEventHandlerService.AddListener<EnemyDeadEvent>(OnEnemyDeadEvent);
         }
 
         private void OnDestroy()
         {
             mEventHandlerService.RemoveListener<EnemySpawnerPointRegisterEvent>(OnEnemySpawnerPointRegister);
-            mEventHandlerService.RemoveListener<EnemyReachedDestinationEvent>(OnReleaseEnemyEvent);
+            mEventHandlerService.RemoveListener<EnemyReachedDestinationEvent>(OnEnemyReachedDestinationEvent);
             mEventHandlerService.RemoveListener<EnemyDeadEvent>(OnEnemyDeadEvent);
         }
 
@@ -30,7 +30,7 @@ namespace towerdefence.systems.spawner
             spawnPool.Release(e.Enemy);
         }
 
-        private void OnReleaseEnemyEvent(EnemyReachedDestinationEvent e)
+        private void OnEnemyReachedDestinationEvent(EnemyReachedDestinationEvent e)
         {
             spawnPool.Release(e.EnemyBehaviour);
         }

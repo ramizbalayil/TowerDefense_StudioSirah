@@ -1,10 +1,15 @@
 using frameworks.ioc;
+using frameworks.services;
+using frameworks.services.events;
+using towerdefence.events;
 using UnityEngine;
 
 namespace towerdefence.systems.projectiles
 {
     public class ProjectileBehaviour : BaseBehaviour
     {
+        [InjectService] private EventHandlerService mEventHandlerService;
+
         [SerializeField] private float mDamage = 10f;
         [SerializeField] private float mSpeed = 20f;
 
@@ -23,6 +28,11 @@ namespace towerdefence.systems.projectiles
         private void Update()
         {
             transform.Translate(mSpeed * Time.deltaTime * mDirection);
+        }
+
+        public void HandleProjectileHit()
+        {
+            mEventHandlerService.TriggerEvent(new ProjectileHitEvent(this));
         }
     }
 }

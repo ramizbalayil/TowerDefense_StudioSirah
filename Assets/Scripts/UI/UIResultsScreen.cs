@@ -15,7 +15,6 @@ namespace towerdefence.ui
         [InjectService] private EventHandlerService mEventHandlerService;
         [InjectService] private SceneManagementService mSceneManagementService;
 
-
         [SerializeField] private TextMeshProUGUI _ResultLabel;
         [SerializeField] private Button _BackToLobbyButton;
 
