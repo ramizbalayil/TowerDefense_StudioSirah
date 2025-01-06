@@ -35,7 +35,6 @@ namespace towerdefence.ui
 
         private void OnEnemyReachedDestinationEvent(EnemyReachedDestinationEvent e)
         {
-            mScoreKeeperService.ReduceScore();
             UpdateScoreLabel();
         }
     }

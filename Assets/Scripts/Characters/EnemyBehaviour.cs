@@ -3,6 +3,7 @@ using frameworks.services;
 using frameworks.services.events;
 using towerdefence.characters.health;
 using towerdefence.events;
+using towerdefence.services;
 using towerdefence.systems.projectiles;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,7 +14,8 @@ namespace towerdefence.characters.enemy
     public class EnemyBehaviour : BaseBehaviour
     {
         [InjectService] EventHandlerService mEventHandlerService;
-        
+        [InjectService] private ScoreKeeperService mScoreKeeperService;
+
         [SerializeField] UIHealthBar _HealthBar;
         [SerializeField] Transform _ProjectileTarget;
 
@@ -27,11 +29,19 @@ namespace towerdefence.characters.enemy
         {
             base.Awake();
             mAgent = GetComponent<NavMeshAgent>();
+            mEventHandlerService.AddListener<LevelCompletedEvent>(OnLevelCompletedEvent);
         }
+
+        private void OnDestroy()
+        {
+            mEventHandlerService.RemoveListener<LevelCompletedEvent>(OnLevelCompletedEvent);
+        }
+
         private void Update()
         {
             if (mAgent.remainingDistance <= 0.01)
             {
+                mScoreKeeperService.ReduceScore();
                 mEventHandlerService.TriggerEvent(new EnemyReachedDestinationEvent(this));
             }
         }
@@ -86,6 +96,15 @@ namespace towerdefence.characters.enemy
         public void SetSpeed(float speed)
         {
             mAgent.speed = speed;
+        }
+
+        private void OnLevelCompletedEvent(LevelCompletedEvent e)
+        {
+            if (mAgent.isOnNavMesh)
+            {
+                mAgent.isStopped = true;
+                SetSpeed(0);
+            }
         }
         #endregion
     }

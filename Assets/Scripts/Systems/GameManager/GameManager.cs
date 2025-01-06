@@ -1,7 +1,6 @@
 using frameworks.ioc;
 using frameworks.services;
 using frameworks.services.events;
-using System;
 using towerdefence.data;
 using towerdefence.events;
 using towerdefence.services;
@@ -52,7 +51,7 @@ namespace towerdefence.systems.manager
         {
             mEnemiesAlive -= 1;
 
-            if (mEnemiesAlive == 0)
+            if (mEnemiesAlive == 0 || !mScoreKeeperService.HasScoreLeft())
             {
                 mEventHandlerService.TriggerEvent(new LevelCompletedEvent(mScoreKeeperService.HasScoreLeft()));
             }
@@ -61,8 +60,8 @@ namespace towerdefence.systems.manager
         {
             mLevelLoaderService.UnlockNextLevel();
 
-            UpgradeReward upgradeReward = mLevelLoaderService.GetLevelReward();
-            mHerosRosterService.AddUpgradeCardsFor(upgradeReward.HeroId, upgradeReward.RewardCards);
+            LevelReward levelReward = mLevelLoaderService.GetLevelReward();
+            mHerosRosterService.AddUpgradeCardsFor(levelReward.HeroId, levelReward.RewardCards);
         }
 
         private void OnEnemyReachedDestinationEvent(EnemyReachedDestinationEvent e)

@@ -2,7 +2,6 @@ using frameworks.ioc;
 using frameworks.services;
 using frameworks.services.events;
 using frameworks.services.scenemanagement;
-using System;
 using TMPro;
 using towerdefence.data;
 using towerdefence.events;
@@ -16,8 +15,10 @@ namespace towerdefence.ui
     {
         [InjectService] private EventHandlerService mEventHandlerService;
         [InjectService] private SceneManagementService mSceneManagementService;
+        [InjectService] private LevelLoaderService mLevelLoaderService;
 
         [SerializeField] private TextMeshProUGUI _ResultLabel;
+        [SerializeField] private TextMeshProUGUI _RewardsLabel;
         [SerializeField] private Button _BackToLobbyButton;
 
         private CanvasGroup mCanvasGroup;
@@ -45,7 +46,17 @@ namespace towerdefence.ui
         private void OnLevelCompletedEvent(LevelCompletedEvent e)
         {
             Show();
-            _ResultLabel.text = e.Won ? "You Won" : "You Lost";
+            if (e.Won)
+            {
+                LevelReward levelReward = mLevelLoaderService.GetLevelReward();
+                _ResultLabel.text = "You Won";
+                _RewardsLabel.text = $"Reward : {levelReward.RewardCards} Upgrade Card for {levelReward.HeroId}";
+            }
+            else
+            {
+                _ResultLabel.text = "You Lost";
+                _RewardsLabel.text = "";
+            }
         }
 
 

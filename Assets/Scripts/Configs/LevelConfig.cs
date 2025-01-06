@@ -16,13 +16,13 @@ namespace towerdefence.configs
     {
         public GameObject LevelPrefab;
         public bool Locked;
-        public UpgradeReward UpgradeReward;
+        public LevelReward LevelReward;
 
         public LevelInfo(LevelInfo LevelInfo)
         {
             LevelPrefab = LevelInfo.LevelPrefab;
             Locked = LevelInfo.Locked;
-            UpgradeReward = LevelInfo.UpgradeReward;
+            LevelReward = LevelInfo.LevelReward;
         }
     }
 }

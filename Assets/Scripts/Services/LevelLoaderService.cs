@@ -55,9 +55,9 @@ namespace towerdefence.services
             }
         }
 
-        public UpgradeReward GetLevelReward()
+        public LevelReward GetLevelReward()
         {
-            return mCachedLevelInfo.UpgradeReward;
+            return mCachedLevelInfo.LevelReward;
         }
     }
 }
