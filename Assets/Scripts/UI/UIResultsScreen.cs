@@ -4,7 +4,9 @@ using frameworks.services.events;
 using frameworks.services.scenemanagement;
 using System;
 using TMPro;
+using towerdefence.data;
 using towerdefence.events;
+using towerdefence.services;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,6 +47,8 @@ namespace towerdefence.ui
             Show();
             _ResultLabel.text = e.Won ? "You Won" : "You Lost";
         }
+
+
 
         private void Hide()
         {

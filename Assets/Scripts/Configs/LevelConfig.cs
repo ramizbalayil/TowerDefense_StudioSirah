@@ -1,4 +1,5 @@
 using frameworks.configs;
+using towerdefence.data;
 using UnityEngine;
 
 namespace towerdefence.configs
@@ -14,5 +15,6 @@ namespace towerdefence.configs
     {
         public GameObject LevelPrefab;
         public bool Locked;
+        public UpgradeReward UpgradeReward;
     }
 }

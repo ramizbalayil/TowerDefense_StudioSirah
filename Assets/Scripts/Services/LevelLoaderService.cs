@@ -1,6 +1,7 @@
 using frameworks.configs;
 using frameworks.services;
 using towerdefence.configs;
+using towerdefence.data;
 
 namespace towerdefence.services
 {
@@ -46,6 +47,11 @@ namespace towerdefence.services
                 info.Locked = false;
                 pLevelInfos[mCachedLevelNumber] = info;
             }
+        }
+
+        public UpgradeReward GetLevelReward()
+        {
+            return mCachedLevelInfo.UpgradeReward;
         }
     }
 }
