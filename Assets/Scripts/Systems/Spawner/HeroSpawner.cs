@@ -27,6 +27,7 @@ namespace towerdefence.systems.spawner
             UpgradeLevel upgradeLevel = mHeroRosterService.GetCurrentLevelStats(e.HeroID);
             HeroBehaviour heroBehaviour = SpawnUnit(e.HeroSpawnPoint.transform.position);
             heroBehaviour.SetHeroStats(upgradeLevel.ProjectileSpawnInterval, upgradeLevel.EnemyReachRadius);
+            heroBehaviour.SetModel(mHeroRosterService.GetHeroInfo(e.HeroID).HeroPrefab);
             e.HeroSpawnPoint.Hide();
         }
     }

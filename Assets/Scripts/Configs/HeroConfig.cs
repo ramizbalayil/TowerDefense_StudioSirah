@@ -16,6 +16,9 @@ namespace towerdefence.configs
         public string HeroID;
         public GameObject HeroPrefab;
         public int Level;
+        public GameObject CharacterPreviewPrefab;
+        public Texture CharacterPreviewRenderTexture;
+
         public UpgradeLevel[] UpgradeLevels;
     }
 

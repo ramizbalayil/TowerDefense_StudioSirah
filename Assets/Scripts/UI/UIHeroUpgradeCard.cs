@@ -16,6 +16,8 @@ namespace towerdefence.ui
         [SerializeField] private TextMeshProUGUI _CardsRequiredLabel;
         [SerializeField] private Button _UpgradeButton;
         [SerializeField] private Image _CardsRequiredSlider;
+        [SerializeField] private RawImage _CharacterPreview;
+
 
         private HeroInfo mHeroInfo;
 
@@ -51,6 +53,7 @@ namespace towerdefence.ui
             _CardsRequiredSlider.fillAmount = availableCards / upgradeLevel.CardsRequired;
 
             _UpgradeButton.interactable = availableCards == upgradeLevel.CardsRequired;
+            _CharacterPreview.texture = mHeroInfo.CharacterPreviewRenderTexture;
         }
     }
 }

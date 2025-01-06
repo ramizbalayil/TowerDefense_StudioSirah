@@ -121,6 +121,7 @@ MonoBehaviour:
   _CardsRequiredLabel: {fileID: 1011202326736737065}
   _UpgradeButton: {fileID: 6444917154525548536}
   _CardsRequiredSlider: {fileID: 7881898964875788217}
+  _CharacterPreview: {fileID: 3587403600066706008}
 --- !u!1 &1328479563952239491
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.67339265, g: 0.5061855, b: 0.8584906, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

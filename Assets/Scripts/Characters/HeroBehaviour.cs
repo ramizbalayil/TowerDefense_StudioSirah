@@ -42,6 +42,11 @@ namespace towerdefence.characters.hero
             mEnemyReachRadius = enemyReachRadius;
         }
 
+        public void SetModel(GameObject model)
+        {
+            Instantiate(model, transform);
+        }
+
         private void OnEnemyDeadEvent(EnemyDeadEvent e)
         {
             HandleEnemyDespawned(e.Enemy);

@@ -37,12 +37,21 @@ namespace towerdefence.services
 
         public HeroInfo UpgradeHero(string heroId)
         {
+            HeroInfo info = GetHeroInfo(heroId);
+            if (info != null)
+            {
+                info.Level += 1;
+            }
+            return info;
+        }
+
+        public HeroInfo GetHeroInfo(string heroId)
+        {
             for (int i = 0; i < mHeroInfos.Count; i++)
             {
                 HeroInfo heroInfo = mHeroInfos[i];
                 if (heroInfo.HeroID == heroId)
                 {
-                    heroInfo.Level += 1;
                     return heroInfo;
                 }
             }

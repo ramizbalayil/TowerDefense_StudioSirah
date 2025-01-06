@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeroInfos:
   - HeroID: Hero One
-    HeroPrefab: {fileID: 8641912043890284478, guid: 26998244d5dd7fc43bb6fb2bb23f9a02,
+    HeroPrefab: {fileID: 1199781622917679896, guid: 453828f00b3272e45b67cc590bce8052,
       type: 3}
     Level: 1
+    CharacterPreviewPrefab: {fileID: 3771707367902778391, guid: 69582834c7765cb4bab305fca52ced8b,
+      type: 3}
+    CharacterPreviewRenderTexture: {fileID: 8400000, guid: ee5689c0d052f584ea4a05697d6306b1,
+      type: 2}
     UpgradeLevels:
     - CardsRequired: 0
       EnemyReachRadius: 5
@@ -31,9 +35,13 @@ MonoBehaviour:
       EnemyReachRadius: 7
       ProjectileSpawnInterval: 1
   - HeroID: Hero Two
-    HeroPrefab: {fileID: 7919908800985110171, guid: bdbaf1f8fed498c4e93fb6bca02fa399,
+    HeroPrefab: {fileID: 2188009585067460591, guid: 94c031277e31d1d40af99be82b2848fa,
       type: 3}
     Level: 1
+    CharacterPreviewPrefab: {fileID: 4923018155100765197, guid: 80c422901948316418fd8489a47b02db,
+      type: 3}
+    CharacterPreviewRenderTexture: {fileID: 8400000, guid: d95418eb7370d6944bfef9530df0bb64,
+      type: 2}
     UpgradeLevels:
     - CardsRequired: 0
       EnemyReachRadius: 5
