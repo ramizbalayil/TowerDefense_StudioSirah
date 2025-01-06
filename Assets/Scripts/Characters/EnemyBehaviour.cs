@@ -1,7 +1,7 @@
 using frameworks.ioc;
 using frameworks.services;
 using frameworks.services.events;
-using towerdefence.characters.health;
+using towerdefence.ui;
 using towerdefence.events;
 using towerdefence.services;
 using towerdefence.systems.projectiles;

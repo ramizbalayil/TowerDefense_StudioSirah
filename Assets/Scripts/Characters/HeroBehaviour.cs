@@ -5,19 +5,21 @@ using UnityEngine;
 using towerdefence.events;
 using System.Collections.Generic;
 using towerdefence.characters.enemy;
+using towerdefence.ui;
 
 namespace towerdefence.characters.hero
 {
     public class HeroBehaviour : BaseBehaviour
     {
         [SerializeField] private Transform _ProjectileSpawnPoint;
+        [SerializeField] private UIReachRadius _ReachRadius;
 
         [InjectService] protected EventHandlerService mEventHandlerService;
 
         private List<EnemyBehaviour> mEnemies;
         private EnemyBehaviour mCurrentTargetEnemy;
         private float mTimeElapsed = 0f;
-        private float mEnemyReachRadius = 5f;
+        private float mEnemyReachRadius = 1f;
         private float mProjectileSpawnInterval = 1f;
 
         protected override void Awake()
@@ -40,6 +42,7 @@ namespace towerdefence.characters.hero
         {
             mProjectileSpawnInterval = projectileSpawnInterval;
             mEnemyReachRadius = enemyReachRadius;
+            _ReachRadius.SetSize(mEnemyReachRadius);
         }
 
         public void SetModel(GameObject model)

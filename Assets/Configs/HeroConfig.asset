@@ -16,7 +16,7 @@ MonoBehaviour:
   - HeroID: Hero One
     HeroPrefab: {fileID: 1199781622917679896, guid: 453828f00b3272e45b67cc590bce8052,
       type: 3}
-    Level: 4
+    Level: 1
     CharacterPreviewPrefab: {fileID: 3771707367902778391, guid: 69582834c7765cb4bab305fca52ced8b,
       type: 3}
     CharacterPreviewRenderTexture: {fileID: 8400000, guid: ee5689c0d052f584ea4a05697d6306b1,
