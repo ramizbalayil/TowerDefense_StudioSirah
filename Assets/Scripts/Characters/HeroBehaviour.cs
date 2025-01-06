@@ -114,7 +114,7 @@ namespace towerdefence.characters.hero
                 if (Vector3.Distance(transform.position, enemy.transform.position) < mEnemyReachRadius)
                 {
                     mCurrentTargetEnemy = enemy;
-                    mTimeElapsed = 0f;
+                    mTimeElapsed = mProjectileSpawnInterval;
 
                     break;
                 }
