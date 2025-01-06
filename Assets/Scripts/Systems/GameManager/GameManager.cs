@@ -32,7 +32,7 @@ namespace towerdefence.systems.manager
             mEventHandlerService.RemoveListener<EnemySpawnerPointRegisterEvent>(OnEnemySpawnerPointRegisterEvent);
             mEventHandlerService.RemoveListener<EnemyReachedDestinationEvent>(OnEnemyReachedDestinationEvent);
             mEventHandlerService.RemoveListener<EnemyDeadEvent>(OnEnemyDeadEvent);
-            mEventHandlerService.AddListener<LevelCompletedEvent>(OnLevelCompletedEvent);
+            mEventHandlerService.RemoveListener<LevelCompletedEvent>(OnLevelCompletedEvent);
         }
 
         private void OnLevelCompletedEvent(LevelCompletedEvent e)
