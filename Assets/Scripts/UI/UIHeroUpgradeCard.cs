@@ -78,7 +78,7 @@ namespace towerdefence.ui
             {
                 _CardsRequiredLabel.text = $"MAX LEVEL";
                 _CardsRequiredSlider.fillAmount = 1;
-                _UpgradeButton.gameObject.SetActive(false);
+                _UpgradeButton.interactable = false;
                 _UpgradeInfo.text = "";
             }
         }

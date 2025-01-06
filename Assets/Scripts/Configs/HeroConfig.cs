@@ -27,6 +27,7 @@ namespace towerdefence.configs
             HeroPrefab = HeroInfo.HeroPrefab;
             Level = HeroInfo.Level;
             CharacterPreviewPrefab = HeroInfo.CharacterPreviewPrefab;
+            CharacterPreviewRenderTexture = HeroInfo.CharacterPreviewRenderTexture;
             UpgradeLevels = new List<UpgradeLevel>();
 
             foreach (UpgradeLevel UpgradeLevel in HeroInfo.UpgradeLevels)
