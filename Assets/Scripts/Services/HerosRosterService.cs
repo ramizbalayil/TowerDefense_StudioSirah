@@ -86,10 +86,14 @@ namespace towerdefence.services
             foreach (HeroInfo heroInfo in mHeroInfos)
             {
                 int availableCards = GetUpgradeCardsFor(heroInfo.HeroID);
-                UpgradeLevel upgradeLevel = heroInfo.UpgradeLevels[heroInfo.Level];
 
-                if (availableCards >= upgradeLevel.CardsRequired)
-                    return true;
+                if (heroInfo.Level < heroInfo.UpgradeLevels.Count)
+                {
+                    UpgradeLevel upgradeLevel = heroInfo.UpgradeLevels[heroInfo.Level];
+
+                    if (availableCards >= upgradeLevel.CardsRequired)
+                        return true;
+                }
             }
 
             return false;

@@ -17,7 +17,7 @@ namespace towerdefence.ui
         [SerializeField] private Button _UpgradeButton;
         [SerializeField] private Image _CardsRequiredSlider;
         [SerializeField] private RawImage _CharacterPreview;
-
+        [SerializeField] private TextMeshProUGUI _UpgradeInfo;
 
         private HeroInfo mHeroInfo;
 
@@ -47,13 +47,40 @@ namespace towerdefence.ui
 
             _LevelInfo.text = $"Level {mHeroInfo.Level}";
 
-            int availableCards = mHeroRosterService.GetUpgradeCardsFor(mHeroInfo.HeroID);
-            UpgradeLevel upgradeLevel = mHeroInfo.UpgradeLevels[mHeroInfo.Level];
-            _CardsRequiredLabel.text = $"[{availableCards} / {upgradeLevel.CardsRequired}]";
-            _CardsRequiredSlider.fillAmount = availableCards / upgradeLevel.CardsRequired;
-
-            _UpgradeButton.interactable = availableCards >= upgradeLevel.CardsRequired;
             _CharacterPreview.texture = mHeroInfo.CharacterPreviewRenderTexture;
+
+            if (mHeroInfo.Level < mHeroInfo.UpgradeLevels.Count)
+            {
+                int availableCards = mHeroRosterService.GetUpgradeCardsFor(mHeroInfo.HeroID);
+                UpgradeLevel currentLevel = mHeroInfo.UpgradeLevels[mHeroInfo.Level - 1];
+                UpgradeLevel upgradeLevel = mHeroInfo.UpgradeLevels[mHeroInfo.Level];
+                _CardsRequiredLabel.text = $"[{availableCards} / {upgradeLevel.CardsRequired}]";
+                _CardsRequiredSlider.fillAmount = availableCards / upgradeLevel.CardsRequired;
+
+                _UpgradeButton.interactable = availableCards >= upgradeLevel.CardsRequired;
+
+                bool hasUpgradeForProjectile = upgradeLevel.ProjectileSpawnInterval < currentLevel.ProjectileSpawnInterval;
+                bool hasUpgradeForEnemyReach = upgradeLevel.EnemyReachRadius > currentLevel.EnemyReachRadius;
+
+                _UpgradeInfo.text = "";
+
+                if (hasUpgradeForProjectile)
+                    _UpgradeInfo.text += $"-{currentLevel.ProjectileSpawnInterval - upgradeLevel.ProjectileSpawnInterval} Shoot Projectile Interval";
+
+                if (hasUpgradeForProjectile && hasUpgradeForEnemyReach)
+                    _UpgradeInfo.text += $"\r\n";
+
+                if (hasUpgradeForEnemyReach)
+                    _UpgradeInfo.text += $"+{upgradeLevel.EnemyReachRadius - currentLevel.EnemyReachRadius} Enemy Reach Radius";
+
+            }
+            else
+            {
+                _CardsRequiredLabel.text = $"MAX LEVEL";
+                _CardsRequiredSlider.fillAmount = 1;
+                _UpgradeButton.gameObject.SetActive(false);
+                _UpgradeInfo.text = "";
+            }
         }
     }
 }
