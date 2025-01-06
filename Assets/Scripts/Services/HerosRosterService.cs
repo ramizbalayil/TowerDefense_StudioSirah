@@ -16,7 +16,12 @@ namespace towerdefence.services
             {
                 if (mHeroInfos == null)
                 {
-                    mHeroInfos = new List<HeroInfo>(ConfigRegistry.Get<HeroConfig>().HeroInfos);
+                    mHeroInfos = new List<HeroInfo>();
+                    List<HeroInfo> infos = ConfigRegistry.Get<HeroConfig>().HeroInfos;
+                    foreach (HeroInfo heroInfo in infos)
+                    {
+                        mHeroInfos.Add(new HeroInfo(heroInfo));
+                    }
                 }
                 return mHeroInfos;
             }

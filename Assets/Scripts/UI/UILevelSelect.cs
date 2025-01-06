@@ -2,7 +2,7 @@ using frameworks.services;
 using frameworks.services.events;
 using frameworks.services.scenemanagement;
 using frameworks.ui;
-using System;
+using System.Collections.Generic;
 using towerdefence.configs;
 using towerdefence.events;
 using towerdefence.services;
@@ -39,8 +39,8 @@ namespace towerdefence.ui
 
         private void InitializeLevelSelectGrid()
         {
-            LevelInfo[] levelInfos = mLevelLoaderService.GetLevelInfos();
-            for (int i = 0; i < levelInfos.Length; i++)
+            List<LevelInfo> levelInfos = mLevelLoaderService.GetLevelInfos();
+            for (int i = 0; i < levelInfos.Count; i++)
             {
                 UILevelButton levelButton = Instantiate(_LevelButtonPrefab, _LevelButtonsHolder);
                 levelButton.Initialise(i + 1, levelInfos[i].Locked);

@@ -19,7 +19,21 @@ namespace towerdefence.configs
         public GameObject CharacterPreviewPrefab;
         public Texture CharacterPreviewRenderTexture;
 
-        public UpgradeLevel[] UpgradeLevels;
+        public List<UpgradeLevel> UpgradeLevels;
+
+        public HeroInfo(HeroInfo HeroInfo)
+        {
+            HeroID = HeroInfo.HeroID;
+            HeroPrefab = HeroInfo.HeroPrefab;
+            Level = HeroInfo.Level;
+            CharacterPreviewPrefab = HeroInfo.CharacterPreviewPrefab;
+            UpgradeLevels = new List<UpgradeLevel>();
+
+            foreach (UpgradeLevel UpgradeLevel in HeroInfo.UpgradeLevels)
+            {
+                UpgradeLevels.Add(new UpgradeLevel(UpgradeLevel));
+            }
+        }
     }
 
     [System.Serializable]
@@ -28,5 +42,12 @@ namespace towerdefence.configs
         public int CardsRequired;
         public float EnemyReachRadius;
         public float ProjectileSpawnInterval;
+
+        public UpgradeLevel(UpgradeLevel UpgradeLevel)
+        {
+            CardsRequired = UpgradeLevel.CardsRequired;
+            EnemyReachRadius = UpgradeLevel.EnemyReachRadius;
+            ProjectileSpawnInterval = UpgradeLevel.ProjectileSpawnInterval;
+        }
     }
 }

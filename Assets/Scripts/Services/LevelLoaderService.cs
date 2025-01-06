@@ -1,5 +1,6 @@
 using frameworks.configs;
 using frameworks.services;
+using System.Collections.Generic;
 using towerdefence.configs;
 using towerdefence.data;
 
@@ -10,20 +11,25 @@ namespace towerdefence.services
         private LevelInfo mCachedLevelInfo;
         private int mCachedLevelNumber = 0;
 
-        private LevelInfo[] mLevelInfos = null;
-        private LevelInfo[] pLevelInfos
+        private List<LevelInfo> mLevelInfos = null;
+        private List<LevelInfo> pLevelInfos
         {
             get
             { 
                 if (mLevelInfos == null)
                 {
-                    mLevelInfos = ConfigRegistry.Get<LevelConfig>().LevelInfos;
+                    mLevelInfos = new List<LevelInfo>();
+                    List<LevelInfo> infos = ConfigRegistry.Get<LevelConfig>().LevelInfos;
+                    foreach (LevelInfo levelInfo in infos)
+                    {
+                        mLevelInfos.Add(new LevelInfo(levelInfo));
+                    }
                 }
                 return mLevelInfos;
             }
         }
 
-        public LevelInfo[] GetLevelInfos()
+        public List<LevelInfo> GetLevelInfos()
         {
             return pLevelInfos;
         }
@@ -41,7 +47,7 @@ namespace towerdefence.services
 
         public void UnlockNextLevel()
         {
-            if (mCachedLevelNumber < pLevelInfos.Length)
+            if (mCachedLevelNumber < pLevelInfos.Count)
             {
                 LevelInfo info = pLevelInfos[mCachedLevelNumber];
                 info.Locked = false;
