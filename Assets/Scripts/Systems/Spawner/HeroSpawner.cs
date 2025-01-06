@@ -1,11 +1,16 @@
+using frameworks.services;
+using System.Diagnostics;
 using towerdefence.characters.hero;
+using towerdefence.configs;
 using towerdefence.events;
-using UnityEngine;
+using towerdefence.services;
 
 namespace towerdefence.systems.spawner
 {
     public class HeroSpawner : Spawner<HeroBehaviour>
     {
+        [InjectService] private HerosRosterService mHeroRosterService;
+
         protected override void Awake()
         {
             base.Awake();
@@ -19,7 +24,9 @@ namespace towerdefence.systems.spawner
 
         public void OnHeroSpawnerPointRegister(HeroSpawnerPointRegisterEvent e)
         {
-            SpawnUnit(e.HeroSpawnPoint.transform.position);
+            UpgradeLevel upgradeLevel = mHeroRosterService.GetCurrentLevelStats(e.HeroID);
+            HeroBehaviour heroBehaviour = SpawnUnit(e.HeroSpawnPoint.transform.position);
+            heroBehaviour.SetHeroStats(upgradeLevel.ProjectileSpawnInterval, upgradeLevel.EnemyReachRadius);
             e.HeroSpawnPoint.Hide();
         }
     }

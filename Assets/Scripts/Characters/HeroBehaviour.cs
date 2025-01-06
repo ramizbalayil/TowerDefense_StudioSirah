@@ -11,14 +11,14 @@ namespace towerdefence.characters.hero
     public class HeroBehaviour : BaseBehaviour
     {
         [SerializeField] private Transform _ProjectileSpawnPoint;
-        [SerializeField] private float _EnemyReachRadius = 5f;
-        [SerializeField] private float _ProjectileSpawnInterval = 1f;
 
         [InjectService] protected EventHandlerService mEventHandlerService;
 
         private List<EnemyBehaviour> mEnemies;
         private EnemyBehaviour mCurrentTargetEnemy;
-        private float timeElapsed = 0f;
+        private float mTimeElapsed = 0f;
+        private float mEnemyReachRadius = 5f;
+        private float mProjectileSpawnInterval = 1f;
 
         protected override void Awake()
         {
@@ -34,6 +34,12 @@ namespace towerdefence.characters.hero
             mEventHandlerService.RemoveListener<EnemySpawnEvent>(OnEnemySpawnEvent);
             mEventHandlerService.RemoveListener<EnemyReachedDestinationEvent>(OnEnemyReachedDestinationEvent);
             mEventHandlerService.RemoveListener<EnemyDeadEvent>(OnEnemyDeadEvent);
+        }
+
+        public void SetHeroStats(float projectileSpawnInterval, float enemyReachRadius)
+        {
+            mProjectileSpawnInterval = projectileSpawnInterval;
+            mEnemyReachRadius = enemyReachRadius;
         }
 
         private void OnEnemyDeadEvent(EnemyDeadEvent e)
@@ -74,25 +80,25 @@ namespace towerdefence.characters.hero
 
         private void ShootCurrentTargetEnemy()
         {
-            timeElapsed += Time.deltaTime;
+            mTimeElapsed += Time.deltaTime;
 
-            if (timeElapsed > _ProjectileSpawnInterval)
+            if (mTimeElapsed > mProjectileSpawnInterval)
                 ShootTowardsProjectileInIntervals();
         }
 
         private void ShootTowardsProjectileInIntervals()
         {
-            timeElapsed = 0f;
+            mTimeElapsed = 0f;
             Vector3 projectileDirection = (mCurrentTargetEnemy.GetTargetPosition() - _ProjectileSpawnPoint.position).normalized;
             mEventHandlerService.TriggerEvent(new SpawnProjectileEvent(_ProjectileSpawnPoint.position, projectileDirection));
         }
 
         private void CheckIfCurrentTargetEnemyIsStillInRange()
         {
-            if (Vector3.Distance(transform.position, mCurrentTargetEnemy.transform.position) >= _EnemyReachRadius)
+            if (Vector3.Distance(transform.position, mCurrentTargetEnemy.transform.position) >= mEnemyReachRadius)
             {
                 mCurrentTargetEnemy = null;
-                timeElapsed = 0f;
+                mTimeElapsed = 0f;
             }
         }
 
@@ -100,10 +106,10 @@ namespace towerdefence.characters.hero
         {
             foreach (EnemyBehaviour enemy in mEnemies)
             {
-                if (Vector3.Distance(transform.position, enemy.transform.position) < _EnemyReachRadius)
+                if (Vector3.Distance(transform.position, enemy.transform.position) < mEnemyReachRadius)
                 {
                     mCurrentTargetEnemy = enemy;
-                    timeElapsed = 0f;
+                    mTimeElapsed = 0f;
 
                     break;
                 }
@@ -113,13 +119,17 @@ namespace towerdefence.characters.hero
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, _EnemyReachRadius);
+            Gizmos.DrawWireSphere(transform.position, mEnemyReachRadius);
 
             Gizmos.color = Color.yellow;
-            foreach (EnemyBehaviour enemy in mEnemies)
+
+            if (mEnemies != null &&  mEnemies.Count > 0)
             {
-                if (mCurrentTargetEnemy != enemy)
-                    Gizmos.DrawLine(transform.position, enemy.GetTargetPosition());
+                foreach (EnemyBehaviour enemy in mEnemies)
+                {
+                    if (mCurrentTargetEnemy != enemy)
+                        Gizmos.DrawLine(transform.position, enemy.GetTargetPosition());
+                }
             }
 
             Gizmos.color = Color.red;

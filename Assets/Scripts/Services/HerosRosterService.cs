@@ -49,6 +49,19 @@ namespace towerdefence.services
             return null;
         }
 
+        public UpgradeLevel GetCurrentLevelStats(string heroId)
+        {
+            for (int i = 0; i < mHeroInfos.Count; i++)
+            {
+                HeroInfo heroInfo = mHeroInfos[i];
+                if (heroInfo.HeroID == heroId)
+                {
+                    return heroInfo.UpgradeLevels[heroInfo.Level - 1];
+                }
+            }
+            return null;
+        }
+
         public int GetUpgradeCardsFor(string heroId)
         {
             return mUpgradeCardInventory.GetItem(heroId);
