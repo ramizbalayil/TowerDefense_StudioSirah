@@ -47,7 +47,7 @@ namespace towerdefence.ui
 
             _LevelInfo.text = $"Level {mHeroInfo.Level}";
 
-            int availableCards = mHeroRosterService.GetUpgradeCardsFor(heroInfo.HeroID);
+            int availableCards = mHeroRosterService.GetUpgradeCardsFor(mHeroInfo.HeroID);
             UpgradeLevel upgradeLevel = mHeroInfo.UpgradeLevels[mHeroInfo.Level];
             _CardsRequiredLabel.text = $"[{availableCards} / {upgradeLevel.CardsRequired}]";
             _CardsRequiredSlider.fillAmount = availableCards / upgradeLevel.CardsRequired;

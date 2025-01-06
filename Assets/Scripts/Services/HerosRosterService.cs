@@ -81,6 +81,20 @@ namespace towerdefence.services
             return mUpgradeCardInventory.GetItem(heroId);
         }
 
+        public bool HasUpgradesAvailable()
+        {
+            foreach (HeroInfo heroInfo in mHeroInfos)
+            {
+                int availableCards = GetUpgradeCardsFor(heroInfo.HeroID);
+                UpgradeLevel upgradeLevel = heroInfo.UpgradeLevels[heroInfo.Level];
+
+                if (availableCards == upgradeLevel.CardsRequired)
+                    return true;
+            }
+
+            return false;
+        }
+
         public void AddUpgradeCardsFor(string heroId, int amount)
         {
             int prevAmount = mUpgradeCardInventory.GetItem(heroId);

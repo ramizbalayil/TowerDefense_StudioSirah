@@ -1,4 +1,6 @@
+using frameworks.services;
 using frameworks.ui;
+using towerdefence.services;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,14 +8,18 @@ namespace towerdefence.ui
 {
     public class UIMainMenu : UIScreen
     {
+        [InjectService] HerosRosterService mHeroRosterService;
+
         [SerializeField] private Button _PlayGameButton;
         [SerializeField] private Button _UpgradeHeroesButton;
+        [SerializeField] private GameObject _UpgradeNotification;
 
         protected override void Awake()
         {
             base.Awake();
             _PlayGameButton.onClick.AddListener(OnPlayGamesButtonClicked);
             _UpgradeHeroesButton.onClick.AddListener(OnUpgradeHeroesButtonClicked);
+            _UpgradeNotification.SetActive(mHeroRosterService.HasUpgradesAvailable());
         }
 
         private void OnDestroy()
