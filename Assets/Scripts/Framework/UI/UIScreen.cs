@@ -15,13 +15,13 @@ namespace frameworks.ui
             mCanvasGroup = GetComponent<CanvasGroup>();
         }
 
-        public void Show()
+        public virtual void Show()
         {
             mCanvasGroup.alpha = 1f;
             mCanvasGroup.blocksRaycasts = true;
         }
 
-        public void Hide()
+        public virtual void Hide()
         {
             mCanvasGroup.alpha = 0f;
             mCanvasGroup.blocksRaycasts = false;

@@ -19,13 +19,18 @@ namespace towerdefence.ui
             base.Awake();
             _PlayGameButton.onClick.AddListener(OnPlayGamesButtonClicked);
             _UpgradeHeroesButton.onClick.AddListener(OnUpgradeHeroesButtonClicked);
-            _UpgradeNotification.SetActive(mHeroRosterService.HasUpgradesAvailable());
         }
 
         private void OnDestroy()
         {
             _PlayGameButton.onClick.RemoveListener(OnPlayGamesButtonClicked);
             _UpgradeHeroesButton.onClick.RemoveListener(OnUpgradeHeroesButtonClicked);
+        }
+
+        public override void Show()
+        {
+            base.Show();
+            _UpgradeNotification.SetActive(mHeroRosterService.HasUpgradesAvailable());
         }
 
         private void OnPlayGamesButtonClicked()

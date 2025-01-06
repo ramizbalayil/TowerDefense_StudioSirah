@@ -16,6 +16,10 @@ namespace frameworks.ui
         {
             base.Awake();
             InitialiseScreenMaps();
+        }
+
+        private void Start()
+        {
             if (_DefaultScreen != null)
                 ShowScreen(_DefaultScreen.ScreenID);
         }
