@@ -52,7 +52,7 @@ namespace towerdefence.ui
             _CardsRequiredLabel.text = $"[{availableCards} / {upgradeLevel.CardsRequired}]";
             _CardsRequiredSlider.fillAmount = availableCards / upgradeLevel.CardsRequired;
 
-            _UpgradeButton.interactable = availableCards == upgradeLevel.CardsRequired;
+            _UpgradeButton.interactable = availableCards >= upgradeLevel.CardsRequired;
             _CharacterPreview.texture = mHeroInfo.CharacterPreviewRenderTexture;
         }
     }
