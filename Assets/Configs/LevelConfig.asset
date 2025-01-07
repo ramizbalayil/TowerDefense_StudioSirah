@@ -16,18 +16,9 @@ MonoBehaviour:
   - LevelPrefab: {fileID: 1728495710591737742, guid: 7df4924840788f84387afbcb26148f26,
       type: 3}
     Locked: 0
-    LevelReward:
-      HeroId: Hero One
-      RewardCards: 1
   - LevelPrefab: {fileID: 1728495710591737742, guid: fba1a9eac1d260f48a0b7b9cbf46db62,
       type: 3}
     Locked: 1
-    LevelReward:
-      HeroId: Hero Two
-      RewardCards: 1
   - LevelPrefab: {fileID: 1728495710591737742, guid: f26fd838c2a4d2b4fa3dd16bd356adf3,
       type: 3}
     Locked: 1
-    LevelReward:
-      HeroId: Hero Two
-      RewardCards: 2

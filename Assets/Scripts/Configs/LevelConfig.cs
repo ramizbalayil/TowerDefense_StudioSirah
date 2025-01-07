@@ -1,6 +1,5 @@
 using frameworks.configs;
 using System.Collections.Generic;
-using towerdefence.data;
 using UnityEngine;
 
 namespace towerdefence.configs
@@ -16,13 +15,11 @@ namespace towerdefence.configs
     {
         public GameObject LevelPrefab;
         public bool Locked;
-        public LevelReward LevelReward;
 
         public LevelInfo(LevelInfo LevelInfo)
         {
             LevelPrefab = LevelInfo.LevelPrefab;
             Locked = LevelInfo.Locked;
-            LevelReward = LevelInfo.LevelReward;
         }
     }
 }

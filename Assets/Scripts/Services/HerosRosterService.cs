@@ -81,6 +81,11 @@ namespace towerdefence.services
             return mUpgradeCardInventory.GetItem(heroId);
         }
 
+        public string GetRandomHeroId()
+        {
+            return mHeroInfos[UnityEngine.Random.Range(0, mHeroInfos.Count)].HeroID;
+        }
+
         public bool HasUpgradesAvailable()
         {
             foreach (HeroInfo heroInfo in mHeroInfos)

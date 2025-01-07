@@ -3,7 +3,6 @@ using frameworks.services;
 using frameworks.services.events;
 using frameworks.services.scenemanagement;
 using TMPro;
-using towerdefence.data;
 using towerdefence.events;
 using towerdefence.services;
 using UnityEngine;
@@ -16,6 +15,7 @@ namespace towerdefence.ui
         [InjectService] private EventHandlerService mEventHandlerService;
         [InjectService] private SceneManagementService mSceneManagementService;
         [InjectService] private LevelLoaderService mLevelLoaderService;
+        [InjectService] private HerosRosterService mHerosRosterService;
 
         [SerializeField] private TextMeshProUGUI _ResultLabel;
         [SerializeField] private TextMeshProUGUI _RewardsLabel;
@@ -48,9 +48,12 @@ namespace towerdefence.ui
             Show();
             if (e.Won)
             {
-                LevelReward levelReward = mLevelLoaderService.GetLevelReward();
+                string heroId = mHerosRosterService.GetRandomHeroId();
+                mHerosRosterService.AddUpgradeCardsFor(heroId, 1);
+                mLevelLoaderService.UnlockNextLevel();
+
                 _ResultLabel.text = "You Won";
-                _RewardsLabel.text = $"Reward : {levelReward.RewardCards} Upgrade Card for {levelReward.HeroId}";
+                _RewardsLabel.text = $"Reward : 1 Upgrade Card for {heroId}";
             }
             else
             {

@@ -1,7 +1,6 @@
 using frameworks.ioc;
 using frameworks.services;
 using frameworks.services.events;
-using towerdefence.data;
 using towerdefence.events;
 using towerdefence.services;
 
@@ -11,8 +10,6 @@ namespace towerdefence.systems.manager
     {
         [InjectService] private EventHandlerService mEventHandlerService;
         [InjectService] private ScoreKeeperService mScoreKeeperService;
-        [InjectService] private HerosRosterService mHerosRosterService;
-        [InjectService] private LevelLoaderService mLevelLoaderService;
 
         private int mMaxEnemies;
         private int mEnemiesAlive;
@@ -23,7 +20,6 @@ namespace towerdefence.systems.manager
             mEventHandlerService.AddListener<EnemySpawnerPointRegisterEvent>(OnEnemySpawnerPointRegisterEvent);
             mEventHandlerService.AddListener<EnemyReachedDestinationEvent>(OnEnemyReachedDestinationEvent);
             mEventHandlerService.AddListener<EnemyDeadEvent>(OnEnemyDeadEvent);
-            mEventHandlerService.AddListener<LevelCompletedEvent>(OnLevelCompletedEvent);
         }
 
         private void OnDestroy()
@@ -31,15 +27,6 @@ namespace towerdefence.systems.manager
             mEventHandlerService.RemoveListener<EnemySpawnerPointRegisterEvent>(OnEnemySpawnerPointRegisterEvent);
             mEventHandlerService.RemoveListener<EnemyReachedDestinationEvent>(OnEnemyReachedDestinationEvent);
             mEventHandlerService.RemoveListener<EnemyDeadEvent>(OnEnemyDeadEvent);
-            mEventHandlerService.RemoveListener<LevelCompletedEvent>(OnLevelCompletedEvent);
-        }
-
-        private void OnLevelCompletedEvent(LevelCompletedEvent e)
-        {
-            if (e.Won)
-            {
-                HandleLevelWin();
-            }
         }
 
         private void OnEnemyDeadEvent(EnemyDeadEvent e)
@@ -55,13 +42,6 @@ namespace towerdefence.systems.manager
             {
                 mEventHandlerService.TriggerEvent(new LevelCompletedEvent(mScoreKeeperService.HasScoreLeft()));
             }
-        }
-        private void HandleLevelWin()
-        {
-            mLevelLoaderService.UnlockNextLevel();
-
-            LevelReward levelReward = mLevelLoaderService.GetLevelReward();
-            mHerosRosterService.AddUpgradeCardsFor(levelReward.HeroId, levelReward.RewardCards);
         }
 
         private void OnEnemyReachedDestinationEvent(EnemyReachedDestinationEvent e)
