@@ -3,6 +3,7 @@ using System.Collections;
 using towerdefence.characters.enemy;
 using towerdefence.events;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace towerdefence.systems.spawner
 {
@@ -50,6 +51,7 @@ namespace towerdefence.systems.spawner
             for (int i = 0; i < maxEnemies; i++)
             {
                 EnemyBehaviour enemy = SpawnUnit(spawnPosition);
+                enemy.SetAgentEnabled(true);
                 enemy.ResetHealth();
                 enemy.SetSpeed(enemySpeed);
                 enemy.SetDestination(destination);
@@ -59,6 +61,19 @@ namespace towerdefence.systems.spawner
             }
 
             yield return null;
+        }
+
+        protected override void ReleaseUnit(EnemyBehaviour enemy)
+        {
+            enemy.SetAgentEnabled(false);
+            base.ReleaseUnit(enemy);
+        }
+
+        protected override EnemyBehaviour InitializeUnits()
+        {
+            EnemyBehaviour enemy = base.InitializeUnits();
+            enemy.SetAgentEnabled(false);
+            return enemy;
         }
     }
 }

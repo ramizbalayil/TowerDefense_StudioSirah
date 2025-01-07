@@ -25,29 +25,30 @@ namespace towerdefence.systems.spawner
                 DestroyUnit, false, _DefaultPoolSize, _MaxPoolSize);
         }
 
-        protected T SpawnUnit(Vector3 pos)
+        protected virtual T SpawnUnit(Vector3 pos)
         {
             T unit = spawnPool.Get();
             unit.transform.position = new Vector3(pos.x, pos.y, pos.z);
             return unit;
         }
 
-        private T InitializeUnits()
+        protected virtual T InitializeUnits()
         {
             GameObject go = Instantiate(_SpawnPrefab, transform);
             return go.GetComponent<T>();
         }
-        private void DestroyUnit(T go)
+
+        protected virtual void DestroyUnit(T go)
         {
             Destroy(go.gameObject);
         }
 
-        private void ReleaseUnit(T go)
+        protected virtual void ReleaseUnit(T go)
         {
             go.gameObject.SetActive(false);
         }
 
-        private void GetUnit(T go)
+        protected virtual void GetUnit(T go)
         {
             go.gameObject.SetActive(true);
         }

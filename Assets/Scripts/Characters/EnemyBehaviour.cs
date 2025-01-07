@@ -89,6 +89,10 @@ namespace towerdefence.characters.enemy
         #endregion
 
         #region Navigation
+        public void SetAgentEnabled(bool status)
+        {
+            mAgent.enabled = status;
+        }
         public void SetDestination(Vector3 target)
         {
             mAgent.SetDestination(target);
