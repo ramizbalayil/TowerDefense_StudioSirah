@@ -38,7 +38,6 @@ namespace towerdefence.systems.spawner
         private void OnEnemySpawnerPointRegister(EnemySpawnerPointRegisterEvent e)
         {
             spawnPoint = e.EnemySpawnPoint.transform.position;
-            e.EnemySpawnPoint.Hide();
 
             StartCoroutine(SpawnEnemyUnits(spawnPoint, e.EnemyDestination, e.MaxEnemies, e.SpawnInterval, e.EnemySpeed));
         }

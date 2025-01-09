@@ -32,10 +32,5 @@ namespace towerdefence.systems.spawner
             mEventHandlerService.TriggerEvent(new EnemySpawnerPointRegisterEvent(this,
                 _Destination.position, levelInfo.MaxEnemies, levelInfo.SpawnInterval, levelInfo.EnemySpeed));
         }
-
-        public void Hide()
-        {
-            gameObject.SetActive(false);
-        }
     }
 }

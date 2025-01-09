@@ -627,6 +627,11 @@ PrefabInstance:
       propertyPath: HeroID
       value: Hero Two
       objectReference: {fileID: 0}
+    - target: {fileID: 6065033451513845647, guid: 9d5436f116bcd544893389c437da8080,
+        type: 3}
+      propertyPath: _HeroID
+      value: Hero Two
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -961,6 +966,11 @@ PrefabInstance:
     - target: {fileID: 6065033451513845647, guid: 9d5436f116bcd544893389c437da8080,
         type: 3}
       propertyPath: HeroID
+      value: Hero One
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065033451513845647, guid: 9d5436f116bcd544893389c437da8080,
+        type: 3}
+      propertyPath: _HeroID
       value: Hero One
       objectReference: {fileID: 0}
     m_RemovedComponents: []

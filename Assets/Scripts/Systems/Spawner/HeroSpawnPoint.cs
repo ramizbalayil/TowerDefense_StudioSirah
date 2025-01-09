@@ -1,25 +1,36 @@
 using frameworks.ioc;
 using frameworks.services;
 using frameworks.services.events;
-using System;
+using towerdefence.configs;
 using towerdefence.events;
-using Unity.AI.Navigation;
+using towerdefence.services;
+using towerdefence.ui;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.EventSystems;
 
 namespace towerdefence.systems.spawner
 {
     public class HeroSpawnPoint : BaseBehaviour
     {
-        [SerializeField] private string HeroID;
+        [SerializeField] private string _HeroID;
+        [SerializeField] private UIReachRadius _ReachRadius;
+
         [InjectService] private EventHandlerService mEventHandlerService;
+        [InjectService] private HerosRosterService mHeroRosterService;
 
         protected override void Awake()
         {
             base.Awake();
             mEventHandlerService.AddListener<DragHeroSpawnPoint>(OnDragHeroSpawnPoint);
             mEventHandlerService.AddListener<StartGameEvent>(OnStartGameEvent);
+
+            SetupEnemyReachRadius();
+        }
+
+        private void SetupEnemyReachRadius()
+        {
+            UpgradeLevel upgradeLevel = mHeroRosterService.GetCurrentLevelStats(_HeroID);
+            _ReachRadius.SetSize(upgradeLevel.EnemyReachRadius);
         }
 
         private void OnDestroy()
@@ -30,12 +41,12 @@ namespace towerdefence.systems.spawner
 
         private void OnStartGameEvent(StartGameEvent e)
         {
-            mEventHandlerService.TriggerEvent(new HeroSpawnerPointRegisterEvent(HeroID, this));
+            mEventHandlerService.TriggerEvent(new HeroSpawnerPointRegisterEvent(_HeroID, this));
         }
 
         private void OnDragHeroSpawnPoint(DragHeroSpawnPoint e)
         {
-            if (e.IsDragging && e.HeroId == HeroID)
+            if (e.IsDragging && e.HeroId == _HeroID)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hitInfo))
