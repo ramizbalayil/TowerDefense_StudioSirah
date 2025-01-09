@@ -3,17 +3,17 @@ using frameworks.services;
 using towerdefence.events;
 using frameworks.ioc;
 using UnityEngine;
+using towerdefence.services;
+using towerdefence.configs;
 
 namespace towerdefence.systems.spawner
 {
     public class EnemySpawnPoint : BaseBehaviour
     {
         [SerializeField] private Transform _Destination;
-        [SerializeField] private int _MaxEnemies;
-        [SerializeField] private float _SpawnInterval;
-        [SerializeField] private float _EnemySpeed;
 
         [InjectService] private EventHandlerService mEventHandlerService;
+        [InjectService] private LevelLoaderService mLevelLoaderService;
 
         protected override void Awake()
         {
@@ -28,7 +28,9 @@ namespace towerdefence.systems.spawner
 
         private void OnStartGameEvent(StartGameEvent e)
         {
-            mEventHandlerService.TriggerEvent(new EnemySpawnerPointRegisterEvent(this, _Destination.position, _MaxEnemies, _SpawnInterval, _EnemySpeed));
+            LevelInfo levelInfo = mLevelLoaderService.GetLevelInfo();
+            mEventHandlerService.TriggerEvent(new EnemySpawnerPointRegisterEvent(this,
+                _Destination.position, levelInfo.MaxEnemies, levelInfo.SpawnInterval, levelInfo.EnemySpeed));
         }
 
         public void Hide()
