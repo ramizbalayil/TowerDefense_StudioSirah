@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8226309656880197587}
   - component: {fileID: 432461732698707524}
   - component: {fileID: 3110575706082510238}
+  - component: {fileID: 6279745230871507034}
   m_Layer: 5
   m_Name: HeroSelector
   m_TagString: Untagged
@@ -92,6 +93,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HeroLabel: {fileID: 3683582185926672448}
   _CharacterPreview: {fileID: 2027251680227150887}
+  _CanvasGroup: {fileID: 6279745230871507034}
+--- !u!225 &6279745230871507034
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626148801901869234}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &752614243763884585
 GameObject:
   m_ObjectHideFlags: 0
