@@ -55,7 +55,7 @@ namespace towerdefence.ui
                 UpgradeLevel currentLevel = mHeroInfo.UpgradeLevels[mHeroInfo.Level - 1];
                 UpgradeLevel upgradeLevel = mHeroInfo.UpgradeLevels[mHeroInfo.Level];
                 _CardsRequiredLabel.text = $"[{availableCards} / {upgradeLevel.CardsRequired}]";
-                _CardsRequiredSlider.fillAmount = availableCards / upgradeLevel.CardsRequired;
+                _CardsRequiredSlider.fillAmount = availableCards / (float)upgradeLevel.CardsRequired;
 
                 _UpgradeButton.interactable = availableCards >= upgradeLevel.CardsRequired;
 

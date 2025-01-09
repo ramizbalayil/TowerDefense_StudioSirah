@@ -22,12 +22,9 @@ namespace towerdefence.ui
         [SerializeField] private TextMeshProUGUI _RewardsLabel;
         [SerializeField] private Button _BackToLobbyButton;
 
-        private CanvasGroup mCanvasGroup;
-
         protected override void Awake()
         {
             base.Awake();
-            mCanvasGroup = GetComponent<CanvasGroup>();
             _BackToLobbyButton.onClick.AddListener(OnBackToLobbyButtonClicked);
             mEventHandlerService.AddListener<LevelCompletedEvent>(OnLevelCompletedEvent);
         }
