@@ -31,6 +31,7 @@ namespace towerdefence.ui
             {
                 UIHeroUpgradeCard upgradeCard = Instantiate(_HeroUpgradeCardPrefab, _HeroUpgradeCardsHolder);
                 upgradeCard.InitializeCard(heroInfo);
+
                 GameObject obj = Instantiate(heroInfo.CharacterPreviewPrefab, _CharacterPreviewsHolder);
                 obj.transform.position = new Vector3(xOffset, 0f, 0f);
                 xOffset -= 5f;

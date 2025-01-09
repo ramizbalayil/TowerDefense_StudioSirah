@@ -3,7 +3,6 @@ using System.Collections;
 using towerdefence.characters.enemy;
 using towerdefence.events;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace towerdefence.systems.spawner
 {

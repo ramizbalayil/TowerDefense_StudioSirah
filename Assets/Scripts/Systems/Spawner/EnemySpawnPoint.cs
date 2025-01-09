@@ -15,7 +15,18 @@ namespace towerdefence.systems.spawner
 
         [InjectService] private EventHandlerService mEventHandlerService;
 
-        protected void Start()
+        protected override void Awake()
+        {
+            base.Awake();
+            mEventHandlerService.AddListener<StartGameEvent>(OnStartGameEvent);
+        }
+
+        private void OnDestroy()
+        {
+            mEventHandlerService.RemoveListener<StartGameEvent>(OnStartGameEvent);
+        }
+
+        private void OnStartGameEvent(StartGameEvent e)
         {
             mEventHandlerService.TriggerEvent(new EnemySpawnerPointRegisterEvent(this, _Destination.position, _MaxEnemies, _SpawnInterval, _EnemySpeed));
         }

@@ -2,6 +2,7 @@ using frameworks.ioc;
 using frameworks.services;
 using frameworks.services.events;
 using frameworks.services.scenemanagement;
+using frameworks.ui;
 using TMPro;
 using towerdefence.events;
 using towerdefence.services;
@@ -10,7 +11,7 @@ using UnityEngine.UI;
 
 namespace towerdefence.ui
 {
-    public class UIResultsScreen : BaseBehaviour
+    public class UIResultsScreen : UIScreen
     {
         [InjectService] private EventHandlerService mEventHandlerService;
         [InjectService] private SceneManagementService mSceneManagementService;
@@ -29,7 +30,6 @@ namespace towerdefence.ui
             mCanvasGroup = GetComponent<CanvasGroup>();
             _BackToLobbyButton.onClick.AddListener(OnBackToLobbyButtonClicked);
             mEventHandlerService.AddListener<LevelCompletedEvent>(OnLevelCompletedEvent);
-            Hide();
         }
 
         private void OnBackToLobbyButtonClicked()
@@ -60,18 +60,6 @@ namespace towerdefence.ui
                 _ResultLabel.text = "You Lost";
                 _RewardsLabel.text = "";
             }
-        }
-
-
-
-        private void Hide()
-        {
-            mCanvasGroup.alpha = 0;
-        }
-
-        private void Show()
-        {
-            mCanvasGroup.alpha = 1;
         }
     }
 }
