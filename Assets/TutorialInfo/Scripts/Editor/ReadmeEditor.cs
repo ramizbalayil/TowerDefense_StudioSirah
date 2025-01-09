@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
-using System;
 using System.IO;
 using System.Reflection;
 
@@ -12,43 +9,11 @@ public class ReadmeEditor : Editor
 {
     static string s_ShowedReadmeSessionStateName = "ReadmeEditor.showedReadme";
     
-    static string s_ReadmeSourceDirectory = "Assets/TutorialInfo";
-
     const float k_Space = 16f;
 
     static ReadmeEditor()
     {
         EditorApplication.delayCall += SelectReadmeAutomatically;
-    }
-
-    static void RemoveTutorial()
-    {
-        if (EditorUtility.DisplayDialog("Remove Readme Assets",
-            
-            $"All contents under {s_ReadmeSourceDirectory} will be removed, are you sure you want to proceed?",
-            "Proceed",
-            "Cancel"))
-        {
-            if (Directory.Exists(s_ReadmeSourceDirectory))
-            {
-                FileUtil.DeleteFileOrDirectory(s_ReadmeSourceDirectory);
-                FileUtil.DeleteFileOrDirectory(s_ReadmeSourceDirectory + ".meta");
-            }
-            else
-            {
-                Debug.Log($"Could not find the Readme folder at {s_ReadmeSourceDirectory}");
-            }
-
-            var readmeAsset = SelectReadme();
-            if (readmeAsset != null)
-            {
-                var path = AssetDatabase.GetAssetPath(readmeAsset);
-                FileUtil.DeleteFileOrDirectory(path + ".meta");
-                FileUtil.DeleteFileOrDirectory(path);
-            }
-
-            AssetDatabase.Refresh();
-        }
     }
 
     static void SelectReadmeAutomatically()
@@ -146,11 +111,6 @@ public class ReadmeEditor : Editor
             }
 
             GUILayout.Space(k_Space);
-        }
-
-        if (GUILayout.Button("Remove Readme Assets", ButtonStyle))
-        {
-            RemoveTutorial();
         }
     }
 
