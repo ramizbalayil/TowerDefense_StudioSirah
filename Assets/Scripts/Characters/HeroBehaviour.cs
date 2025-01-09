@@ -6,6 +6,7 @@ using towerdefence.events;
 using System.Collections.Generic;
 using towerdefence.characters.enemy;
 using towerdefence.ui;
+using UnityEngine.UI;
 
 namespace towerdefence.characters.hero
 {
@@ -13,6 +14,7 @@ namespace towerdefence.characters.hero
     {
         [SerializeField] private Transform _ProjectileSpawnPoint;
         [SerializeField] private UIReachRadius _ReachRadius;
+        [SerializeField] private Image _ProjectileSpawnTimer;
 
         [InjectService] protected EventHandlerService mEventHandlerService;
 
@@ -43,6 +45,18 @@ namespace towerdefence.characters.hero
             mProjectileSpawnInterval = projectileSpawnInterval;
             mEnemyReachRadius = enemyReachRadius;
             _ReachRadius.SetSize(mEnemyReachRadius);
+            mTimeElapsed = mProjectileSpawnInterval;
+            UpdateProjectileTimer();
+        }
+
+        private void UpdateProjectileTimer()
+        {
+            float perc = 0f;
+            if (mTimeElapsed <= mProjectileSpawnInterval)
+            {
+                perc = mProjectileSpawnInterval - mTimeElapsed;
+            }
+            _ProjectileSpawnTimer.fillAmount = perc / mProjectileSpawnInterval;
         }
 
         public void SetModel(GameObject model)
@@ -82,21 +96,32 @@ namespace towerdefence.characters.hero
             if (mCurrentTargetEnemy == null)
                 CheckForEnemiesCloseBy();
 
+            if (mCurrentTargetEnemy == null && mTimeElapsed < mProjectileSpawnInterval)
+                IncrementRunningTimer();
+
             if (mCurrentTargetEnemy != null)
                 ShootCurrentTargetEnemy();
         }
 
         private void ShootCurrentTargetEnemy()
         {
-            mTimeElapsed += Time.deltaTime;
+            IncrementRunningTimer();
 
             if (mTimeElapsed > mProjectileSpawnInterval)
                 ShootTowardsProjectileInIntervals();
         }
 
+        private void IncrementRunningTimer()
+        {
+            mTimeElapsed += Time.deltaTime;
+            UpdateProjectileTimer();
+        }
+
         private void ShootTowardsProjectileInIntervals()
         {
             mTimeElapsed = 0f;
+            UpdateProjectileTimer();
+
             Vector3 projectileDirection = (mCurrentTargetEnemy.GetTargetPosition() - _ProjectileSpawnPoint.position).normalized;
             mEventHandlerService.TriggerEvent(new SpawnProjectileEvent(_ProjectileSpawnPoint.position, projectileDirection));
         }
@@ -106,7 +131,6 @@ namespace towerdefence.characters.hero
             if (Vector3.Distance(transform.position, mCurrentTargetEnemy.transform.position) >= mEnemyReachRadius)
             {
                 mCurrentTargetEnemy = null;
-                mTimeElapsed = 0f;
             }
         }
 
@@ -117,8 +141,6 @@ namespace towerdefence.characters.hero
                 if (Vector3.Distance(transform.position, enemy.transform.position) < mEnemyReachRadius)
                 {
                     mCurrentTargetEnemy = enemy;
-                    mTimeElapsed = mProjectileSpawnInterval;
-
                     break;
                 }
             }
