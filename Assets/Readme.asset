@@ -23,6 +23,10 @@ MonoBehaviour:
     text: 
     linkText: GitHub
     url: https://github.com/ramizbalayil/TowerDefense_StudioSirah
+  - heading: Releases
+    text: 
+    linkText: Find the latest release here
+    url: https://github.com/ramizbalayil/TowerDefense_StudioSirah/releases
   - heading: Connect with me on LinkedIn
     text: 
     linkText: LinkedIn
